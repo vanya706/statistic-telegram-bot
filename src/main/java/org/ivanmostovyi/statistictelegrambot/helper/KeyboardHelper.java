@@ -1,15 +1,13 @@
-package org.vladyka.helper;
+package org.ivanmostovyi.statistictelegrambot.helper;
 
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static org.vladyka.constant.Constants.BTN_CANCEL;
+import static org.ivanmostovyi.statistictelegrambot.constant.Constants.BTN_CANCEL;
 
 /**
  * Helper class, allows to build keyboards for users

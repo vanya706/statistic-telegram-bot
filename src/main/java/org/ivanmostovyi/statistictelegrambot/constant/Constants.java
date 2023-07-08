@@ -1,4 +1,4 @@
-package org.vladyka.constant;
+package org.ivanmostovyi.statistictelegrambot.constant;
 
 public class Constants {
 

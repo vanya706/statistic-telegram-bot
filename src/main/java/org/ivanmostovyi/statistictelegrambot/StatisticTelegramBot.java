@@ -1,19 +1,17 @@
-package org.vladyka;
+package org.ivanmostovyi.statistictelegrambot;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.vladyka.model.UserRequest;
-import org.vladyka.model.UserSession;
-import org.vladyka.service.UserSessionService;
+import org.ivanmostovyi.statistictelegrambot.model.UserRequest;
+import org.ivanmostovyi.statistictelegrambot.model.UserSession;
+import org.ivanmostovyi.statistictelegrambot.service.UserSessionService;
 
 @Slf4j
 @Component
-public class VolunteerHelpBot extends TelegramLongPollingBot {
+public class StatisticTelegramBot extends TelegramLongPollingBot {
 
     @Value("${bot.token}")
     private String botToken;
@@ -24,7 +22,7 @@ public class VolunteerHelpBot extends TelegramLongPollingBot {
     private final Dispatcher dispatcher;
     private final UserSessionService userSessionService;
 
-    public VolunteerHelpBot(Dispatcher dispatcher, UserSessionService userSessionService) {
+    public StatisticTelegramBot(Dispatcher dispatcher, UserSessionService userSessionService) {
         this.dispatcher = dispatcher;
         this.userSessionService = userSessionService;
     }

@@ -1,7 +1,7 @@
-package org.vladyka.handler;
+package org.ivanmostovyi.statistictelegrambot.handler;
 
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.vladyka.model.UserRequest;
+import org.ivanmostovyi.statistictelegrambot.model.UserRequest;
 
 public abstract class UserRequestHandler {
 

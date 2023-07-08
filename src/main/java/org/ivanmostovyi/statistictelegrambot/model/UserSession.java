@@ -1,9 +1,8 @@
-package org.vladyka.model;
+package org.ivanmostovyi.statistictelegrambot.model;
 
 import lombok.Builder;
 import lombok.Data;
-import org.telegram.telegrambots.meta.api.objects.Update;
-import org.vladyka.enums.ConversationState;
+import org.ivanmostovyi.statistictelegrambot.enums.ConversationState;
 
 @Data
 @Builder

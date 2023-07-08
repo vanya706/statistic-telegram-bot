@@ -1,11 +1,11 @@
-package org.vladyka.handler.impl;
+package org.ivanmostovyi.statistictelegrambot.handler.impl;
 
+import org.ivanmostovyi.statistictelegrambot.handler.UserRequestHandler;
+import org.ivanmostovyi.statistictelegrambot.helper.KeyboardHelper;
+import org.ivanmostovyi.statistictelegrambot.model.UserRequest;
+import org.ivanmostovyi.statistictelegrambot.service.TelegramService;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
-import org.vladyka.handler.UserRequestHandler;
-import org.vladyka.helper.KeyboardHelper;
-import org.vladyka.model.UserRequest;
-import org.vladyka.service.TelegramService;
 
 @Component
 public class StartCommandHandler extends UserRequestHandler {

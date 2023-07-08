@@ -1,4 +1,4 @@
-package org.vladyka.sender;
+package org.ivanmostovyi.statistictelegrambot.sender;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

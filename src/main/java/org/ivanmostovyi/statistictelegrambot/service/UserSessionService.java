@@ -1,7 +1,7 @@
-package org.vladyka.service;
+package org.ivanmostovyi.statistictelegrambot.service;
 
+import org.ivanmostovyi.statistictelegrambot.model.UserSession;
 import org.springframework.stereotype.Component;
-import org.vladyka.model.UserSession;
 
 import java.util.HashMap;
 import java.util.Map;

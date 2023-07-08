@@ -1,4 +1,4 @@
-package org.vladyka.enums;
+package org.ivanmostovyi.statistictelegrambot.enums;
 
 public enum ConversationState {
     CONVERSATION_STARTED,
