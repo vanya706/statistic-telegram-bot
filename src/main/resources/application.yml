@@ -1,3 +1,13 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/statistic_telegram_bot}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
 bot:
-  token: <bot-token>
-  username: <username>
+  token: ${BOT_TOKEN}
+  username: ${BOT_USERNAME}

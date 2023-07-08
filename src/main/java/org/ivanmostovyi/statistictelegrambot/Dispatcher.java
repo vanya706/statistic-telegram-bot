@@ -2,7 +2,7 @@ package org.ivanmostovyi.statistictelegrambot;
 
 import org.springframework.stereotype.Component;
 import org.ivanmostovyi.statistictelegrambot.handler.UserRequestHandler;
-import org.ivanmostovyi.statistictelegrambot.model.UserRequest;
+import org.ivanmostovyi.statistictelegrambot.dto.UserRequest;
 
 import java.util.Comparator;
 import java.util.List;

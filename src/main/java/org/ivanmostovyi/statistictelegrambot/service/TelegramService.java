@@ -1,7 +1,7 @@
 package org.ivanmostovyi.statistictelegrambot.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.ivanmostovyi.statistictelegrambot.sender.VolunteerHelpBotSender;
+import org.ivanmostovyi.statistictelegrambot.sender.StatisticTelegramBotSender;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
@@ -15,9 +15,9 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 @Component
 public class TelegramService {
 
-    private final VolunteerHelpBotSender botSender;
+    private final StatisticTelegramBotSender botSender;
 
-    public TelegramService(VolunteerHelpBotSender botSender) {
+    public TelegramService(StatisticTelegramBotSender botSender) {
         this.botSender = botSender;
     }
 

@@ -1,15 +1,20 @@
 package org.ivanmostovyi.statistictelegrambot;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.ivanmostovyi.statistictelegrambot.constant.ChatState;
+import org.ivanmostovyi.statistictelegrambot.domain.TelegramChat;
+import org.ivanmostovyi.statistictelegrambot.domain.TelegramUser;
+import org.ivanmostovyi.statistictelegrambot.dto.UserRequest;
+import org.ivanmostovyi.statistictelegrambot.service.TelegramChatService;
+import org.ivanmostovyi.statistictelegrambot.service.TelegramUserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.ivanmostovyi.statistictelegrambot.model.UserRequest;
-import org.ivanmostovyi.statistictelegrambot.model.UserSession;
-import org.ivanmostovyi.statistictelegrambot.service.UserSessionService;
 
 @Slf4j
+@RequiredArgsConstructor
 @Component
 public class StatisticTelegramBot extends TelegramLongPollingBot {
 
@@ -20,12 +25,8 @@ public class StatisticTelegramBot extends TelegramLongPollingBot {
     private String botUsername;
 
     private final Dispatcher dispatcher;
-    private final UserSessionService userSessionService;
-
-    public StatisticTelegramBot(Dispatcher dispatcher, UserSessionService userSessionService) {
-        this.dispatcher = dispatcher;
-        this.userSessionService = userSessionService;
-    }
+    private final TelegramUserService userService;
+    private final TelegramChatService chatService;
 
     /**
      * This is an entry point for any messages, or updates received from user<br>
@@ -33,7 +34,7 @@ public class StatisticTelegramBot extends TelegramLongPollingBot {
      */
     @Override
     public void onUpdateReceived(Update update) {
-        if(update.hasMessage() && update.getMessage().hasText()) {
+        if (update.hasMessage() && update.getMessage().hasText()) {
             String textFromUser = update.getMessage().getText();
 
             Long userId = update.getMessage().getFrom().getId();
@@ -42,13 +43,32 @@ public class StatisticTelegramBot extends TelegramLongPollingBot {
             log.info("[{}, {}] : {}", userId, userFirstName, textFromUser);
 
             Long chatId = update.getMessage().getChatId();
-            UserSession session = userSessionService.getSession(chatId);
+
+            TelegramUser user = userService.findById(userId)
+                    .orElseGet(() -> {
+                        TelegramUser newUser = TelegramUser.builder()
+                                .id(userId)
+                                .firstName(update.getMessage().getFrom().getFirstName())
+                                .lastName(update.getMessage().getFrom().getLastName())
+                                .userName(update.getMessage().getFrom().getUserName())
+                                .build();
+                        return userService.create(newUser);
+                    });
+
+            TelegramChat chat = chatService.findById(userId)
+                    .orElseGet(() -> {
+                        TelegramChat newChat = TelegramChat.builder()
+                                .id(chatId)
+                                .state(ChatState.STARTED)
+                                .build();
+                        return chatService.create(newChat);
+                    });
 
             UserRequest userRequest = UserRequest
                     .builder()
                     .update(update)
-                    .userSession(session)
-                    .chatId(chatId)
+                    .user(user)
+                    .chat(chat)
                     .build();
 
             boolean dispatched = dispatcher.dispatch(userRequest);
@@ -74,4 +94,5 @@ public class StatisticTelegramBot extends TelegramLongPollingBot {
         // always provide it externally(for example as environmental variable)
         return botToken;
     }
+
 }

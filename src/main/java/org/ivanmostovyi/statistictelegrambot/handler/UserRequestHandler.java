@@ -1,12 +1,25 @@
 package org.ivanmostovyi.statistictelegrambot.handler;
 
+import org.ivanmostovyi.statistictelegrambot.helper.KeyboardHelper;
+import org.ivanmostovyi.statistictelegrambot.dto.UserRequest;
+import org.ivanmostovyi.statistictelegrambot.service.TelegramChatService;
+import org.ivanmostovyi.statistictelegrambot.service.TelegramService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.ivanmostovyi.statistictelegrambot.model.UserRequest;
 
 public abstract class UserRequestHandler {
 
+    @Autowired
+    protected KeyboardHelper keyboardHelper;
+    @Autowired
+    protected TelegramChatService chatService;
+    @Autowired
+    protected TelegramService telegramService;
+
     public abstract boolean isApplicable(UserRequest request);
-    public abstract void handle(UserRequest dispatchRequest);
+
+    public abstract void handle(UserRequest userRequest);
+
     public abstract boolean isGlobal();
 
     public boolean isCommand(Update update, String command) {
@@ -21,4 +34,5 @@ public abstract class UserRequestHandler {
     public boolean isTextMessage(Update update, String text) {
         return update.hasMessage() && update.getMessage().hasText() && update.getMessage().getText().equals(text);
     }
+
 }

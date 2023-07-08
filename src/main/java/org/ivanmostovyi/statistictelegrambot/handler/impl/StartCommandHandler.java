@@ -2,7 +2,7 @@ package org.ivanmostovyi.statistictelegrambot.handler.impl;
 
 import org.ivanmostovyi.statistictelegrambot.handler.UserRequestHandler;
 import org.ivanmostovyi.statistictelegrambot.helper.KeyboardHelper;
-import org.ivanmostovyi.statistictelegrambot.model.UserRequest;
+import org.ivanmostovyi.statistictelegrambot.dto.UserRequest;
 import org.ivanmostovyi.statistictelegrambot.service.TelegramService;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
@@ -28,15 +28,15 @@ public class StartCommandHandler extends UserRequestHandler {
     @Override
     public void handle(UserRequest request) {
         ReplyKeyboard replyKeyboard = keyboardHelper.buildMainMenu();
-        telegramService.sendMessage(request.getChatId(),
-                "\uD83D\uDC4BПривіт! За допомогою цього чат-бота ви зможете зробити запит про допомогу!",
+        telegramService.sendMessage(request.getChat().getId(),
+                "\uD83D\uDC4BПривіт! За допомогою цього чат-бота Ви зможете відслідковувати статистику яку забажаєте, і переглядати її на графіках!",
                 replyKeyboard);
-        telegramService.sendMessage(request.getChatId(),
-                "Обирайте з меню нижче ⤵️");
+        telegramService.sendMessage(request.getChat().getId(), "Обирайте з меню нижче ⤵️");
     }
 
     @Override
     public boolean isGlobal() {
         return true;
     }
+
 }

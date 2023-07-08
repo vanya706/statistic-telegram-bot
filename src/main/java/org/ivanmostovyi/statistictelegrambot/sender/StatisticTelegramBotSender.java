@@ -8,12 +8,12 @@ import org.telegram.telegrambots.bots.DefaultBotOptions;
 
 @Slf4j
 @Component
-public class VolunteerHelpBotSender extends DefaultAbsSender {
+public class StatisticTelegramBotSender extends DefaultAbsSender {
 
     @Value("${bot.token}")
     private String botToken;
 
-    protected VolunteerHelpBotSender() {
+    protected StatisticTelegramBotSender() {
         super(new DefaultBotOptions());
     }
 
