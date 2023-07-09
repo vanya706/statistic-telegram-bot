@@ -1,10 +1,12 @@
 package org.ivanmostovyi.statistictelegrambot.helper;
 
+import org.ivanmostovyi.statistictelegrambot.constant.StatisticValueType;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,6 +47,18 @@ public class KeyboardHelper {
 
         return ReplyKeyboardMarkup.builder()
                 .keyboard(List.of(row1, row2, row3, row4))
+                .selective(true)
+                .resizeKeyboard(true)
+                .oneTimeKeyboard(true)
+                .build();
+    }
+
+    public ReplyKeyboardMarkup buildStatisticValueTypeMenu() {
+        KeyboardRow row = new KeyboardRow();
+        Arrays.stream(StatisticValueType.values()).forEach(statisticValueType -> row.add(statisticValueType.getDisplayedName()));
+
+        return ReplyKeyboardMarkup.builder()
+                .keyboard(List.of(row))
                 .selective(true)
                 .resizeKeyboard(true)
                 .oneTimeKeyboard(true)

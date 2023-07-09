@@ -1,5 +1,7 @@
 package org.ivanmostovyi.statistictelegrambot.handler.impl;
 
+import org.ivanmostovyi.statistictelegrambot.constant.ChatState;
+import org.ivanmostovyi.statistictelegrambot.domain.TelegramChat;
 import org.ivanmostovyi.statistictelegrambot.handler.UserRequestHandler;
 import org.ivanmostovyi.statistictelegrambot.helper.KeyboardHelper;
 import org.ivanmostovyi.statistictelegrambot.dto.UserRequest;
@@ -32,6 +34,10 @@ public class StartCommandHandler extends UserRequestHandler {
                 "\uD83D\uDC4BПривіт! За допомогою цього чат-бота Ви зможете відслідковувати статистику яку забажаєте, і переглядати її на графіках!",
                 replyKeyboard);
         telegramService.sendMessage(request.getChat().getId(), "Обирайте з меню нижче ⤵️");
+
+        TelegramChat chat = request.getChat();
+        chat.setState(ChatState.STARTED);
+        chatService.update(chat);
     }
 
     @Override

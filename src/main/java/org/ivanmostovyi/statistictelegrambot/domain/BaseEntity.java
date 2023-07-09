@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -18,6 +19,7 @@ import javax.persistence.MappedSuperclass;
 public abstract class BaseEntity {
 
     @Id
+    @GeneratedValue
     private Long id;
 
 }
