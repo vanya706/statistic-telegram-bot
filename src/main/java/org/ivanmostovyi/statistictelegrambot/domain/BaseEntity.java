@@ -5,8 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -19,7 +21,8 @@ import javax.persistence.MappedSuperclass;
 public abstract class BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "IdOrGenerated")
+    @GenericGenerator(name = "IdOrGenerated", strategy = "org.ivanmostovyi.statistictelegrambot.helper.UseIdOrGenerate")
     private Long id;
 
 }
