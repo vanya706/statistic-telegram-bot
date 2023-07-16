@@ -22,7 +22,7 @@ public abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "IdOrGenerated")
-    @GenericGenerator(name = "IdOrGenerated", strategy = "org.ivanmostovyi.statistictelegrambot.helper.UseIdOrGenerate")
+    @GenericGenerator(name = "IdOrGenerated", strategy = "org.ivanmostovyi.statistictelegrambot.util.UseIdOrGenerate")
     private Long id;
 
 }
